@@ -1,0 +1,11 @@
+{% extends 'videoapp/base.html'%}
+{% block content %}
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>  
+    <a class="small" href="{{ 'signup' }}">Signup</a>                             
+     <a class="small" href="{{ 'password_reset' }}">Forgot Password?</a>
+{% endblock content %}
