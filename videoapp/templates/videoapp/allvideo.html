@@ -1,0 +1,12 @@
+{% extends 'videoapp/header.html' %}
+{% block content %}
+    <h1>All Videos</h1>
+    <ul>
+        {% for video in videos %}
+        <li>
+            <a href="{% url 'home' pk=video.pk %}">{{ video.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

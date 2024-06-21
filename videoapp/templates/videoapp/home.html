@@ -1,5 +1,6 @@
 {% extends 'videoapp/header.html' %}
 {% block content %}
+<a href="{% url 'allvideo' %}" class="btn btn-primary">View All Videos</a>
 <div class="container mt-4">
     <h1 class="display-4">{{ video.title }}</h1>
     <div class="embed-responsive embed-responsive-16by9 mb-4">
@@ -19,7 +20,28 @@
         {% else %}
         <button class="btn btn-secondary" disabled>Next</button>
         {% endif %}
-        <a href="#" class="btn btn-primary">Share</a>
+        <div class="mt-3">
+            <input hidden type="text" id="shareLink" value="{{ request.build_absolute_uri }}" readonly class="form-control">
+            <button id="copyButton" class="btn btn-primary mt-2">Copy Share Link</button>
+        </div>
     </div>
   </div>
+  <script>
+    document.getElementById('copyButton').addEventListener('click', function() {
+        var shareLink = document.getElementById('shareLink');
+        shareLink.select();
+        shareLink.setSelectionRange(0, 99999); // For mobile devices
+
+        try {
+            var successful = document.execCommand('copy');
+            if (successful) {
+                alert('Link copied to clipboard!');
+            } else {
+                alert('Failed to copy the link.');
+            }
+        } catch (err) {
+            alert('Failed to copy the link.');
+        }
+    });
+</script>
 {% endblock %}

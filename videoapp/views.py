@@ -81,3 +81,8 @@ def home(request, pk):
         #'prev_video': prev_video.video_file,
     }
     )
+@login_required
+def video_list(request):
+    videos = Videos.objects.all()
+    return render(request, 'videoapp/allvideo.html', {'videos': videos})
+
