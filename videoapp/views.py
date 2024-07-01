@@ -24,7 +24,9 @@ def login(request):
                 video=Videos.objects.all()
                 first= video.first()
                 if first:
-                    return redirect('home', pk=first.pk)  
+                    return redirect('home', pk=first.pk) 
+                else:
+                    return redirect(video_list) 
             else:
                 messages.error(request,'Invalid email or password.')
     return render(request,'videoapp/index.html',{'form':form})
@@ -77,8 +79,6 @@ def home(request, pk):
         'video': video,
         'prev_video':prev_video,
         'next_video':next_video
-        #'next_video': next_video.video_file,
-        #'prev_video': prev_video.video_file,
     }
     )
 @login_required
